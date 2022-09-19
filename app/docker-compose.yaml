@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  ui:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: cs_app
+    container_name: cs_app
+    restart: always
+    working_dir: /var/www/
+    ports:
+      - 9090:8080
+    networks:
+      - cs
+networks:
+  cs:
+    driver: bridge

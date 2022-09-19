@@ -1,0 +1,59 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: cs
+        uid: 1000
+      context: .
+      dockerfile: ./Dockerfile
+    image: cs_backend
+    container_name: cs_backend
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - cs
+  ui:
+    build:
+      context: ../app
+      dockerfile: ../app/Dockerfile
+    image: cs_app
+    container_name: cs_app
+    restart: always
+    working_dir: /var/www/
+    ports:
+      - 9090:8080
+    networks:
+      - cs
+  db:
+    image: mysql:8.0
+    container_name: cs_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker/my:/var/lib/mysql
+    networks:
+      - cs
+  nginx:
+    image: nginx:alpine
+    container_name: cs_nginx
+    restart: unless-stopped
+    ports:
+      - 9002:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - cs
+
+networks:
+  cs:
+    driver: bridge

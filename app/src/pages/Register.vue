@@ -18,6 +18,14 @@
             <div class="">
               <q-input v-model="user.password_confirmation" type="password" label="Confirm Password" filled />
             </div>
+            <div style="display:flex;justify-content:center;">
+            <q-btn
+              color="primary"
+              @click="$router.push('/login')"
+              label="Login"
+              class="float-left mr-md"
+              outline
+            />
             <q-btn
               color="primary"
               icon="check"
@@ -25,6 +33,7 @@
               type="submit"
               class="float-right"
             />
+           </div>
           </q-form>
         </div>
       </div>

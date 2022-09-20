@@ -1,4 +1,6 @@
 <?php
+
+use Amot\Conversate\Facades\Conversate;
 use App\Actions\AuthActions;
 use App\Actions\PostActions;
 /**
@@ -12,4 +14,4 @@ use App\Actions\PostActions;
 Conversate::addAction('register',AuthActions::class,'register',false);
 Conversate::addAction('login',AuthActions::class,'login',false);
 Conversate::addAction('create-post',PostActions::class,'createPost',true);
-Conversate::addAction('get-posts',PostActions::class,'getPosts',false);
+Conversate::addAction('get-posts',PostActions::class,'getPosts',true);

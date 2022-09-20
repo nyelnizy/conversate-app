@@ -2,7 +2,7 @@
 
 ## Description
 
-An app that tests both conversate server and client.
+An app that tests both conversate server and client (https://github.com/nyelnizy/conversate.git).
 A connection is made to the server when the app starts, all subsequent requests go through this connection. 
 
 ## Run
